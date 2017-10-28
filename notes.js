@@ -14,6 +14,14 @@ let fetchNotes = () => {
     }
 };
 
+let logNote = note => {
+    debugger;
+    console.log('--------------------');
+    console.log(`Title: ${note.title}`);
+    console.log(`Body: ${note.body}`);
+    console.log('--------------------');
+};
+
 // CRLD Methods
 
 let addNote = (title, body) => {
@@ -39,7 +47,7 @@ let removeNote = (title) => {
 
     let filteredNotes = originalNotes
         .filter(note => note.title !== title);
-    
+
     saveNotes(filteredNotes);
 
     return originalNotes.length > filteredNotes.length;
@@ -53,5 +61,6 @@ module.exports = {
     addNote,
     removeNote,
     getAll,
-    getNote
+    getNote,
+    logNote
 };

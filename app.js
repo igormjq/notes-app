@@ -11,7 +11,7 @@ switch(command) {
         let note = notes.addNote(argv.title, argv.body);
         
         if(note)
-            return console.log(`Note created: ${note.title}, ${note.body}`);
+            return notes.logNote(note);
         
         console.log('Title already in use. Duplicate titles not allowed!');
 
@@ -27,7 +27,7 @@ switch(command) {
     case 'read':
         let targetNote = notes.getNote(argv.title);
         
-        return targetNote ? console.log(targetNote) : console.log(`Note titled "${argv.title}" not found.`);
+        return targetNote ? notes.logNote(targetNote) : console.log(`Note titled "${argv.title}" not found.`);
 
         break;
     case 'list':
