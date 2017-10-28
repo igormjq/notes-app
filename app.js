@@ -5,12 +5,12 @@ const command = argv._[0];
 
 switch(command) {
     case 'add':
-        let note = notes.addNote(argv.title, argv.body);
-        
-        if(note)
-            return notes.logNote(note);
-        
-        console.log('Title already in use. Duplicate titles not allowed!');
+    
+        notes.addNote(argv.title, argv.body)
+            .then(note => {
+                notes.logNote(note);
+            })
+            .catch(err => console.log(err));
 
         break;
     case 'remove':

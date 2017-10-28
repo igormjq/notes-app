@@ -24,18 +24,22 @@ let logNote = note => {
 
 let addNote = (title, body) => {
 
-    let notes = fetchNotes();
+    return new Promise((resolve, reject) => {
+        let notes = fetchNotes();
 
-    let note = { title, body };
+        let note = { title, body };
 
-    let uniqueTitle = !(notes.some(n => n.title === title));
+        let uniqueTitle = !(notes.some(n => n.title === title));
 
-    if(uniqueTitle) {
-        notes.push(note);
-        saveNotes(notes);
-        
-        return note;
-    };
+        if(uniqueTitle) {
+            notes.push(note);
+            saveNotes(notes);
+            
+            return resolve(note);
+        };
+
+        reject('Duplicate title not allowed');
+    });
       
 };
 
