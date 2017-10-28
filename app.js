@@ -1,9 +1,27 @@
-console.log(`starting app.js`);
-
 const notes = require('./notes');
 const yargs = require('yargs');
 
-const argv = yargs.argv;
+const argv = yargs
+    .command('add', 'Add a new note to the file', {
+        title: {
+            describe: 'Title of the note',
+            demand: true,
+            alias: 't'
+        },
+        body: {
+            describe: 'The body content of the note',
+            alias: 'b'
+        }
+    })
+    .command('read', 'Fetches and read a note', {
+        title: {
+            describe: 'Title of the note',
+            demand: true,
+            alias: 't'
+        }
+    })
+    .help()
+    .argv;
 const command = argv._[0];
 
 switch(command) {
@@ -32,8 +50,8 @@ switch(command) {
         break;
     case 'list':
         let list = notes.getAll();
-        console.log('Notes:');
-        console.log(list);
+        console.log(`Printing ${list.length} note(s).`);
+        list.forEach(n => notes.logNote(n));
         
         break;
     default:
