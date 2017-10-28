@@ -45,14 +45,23 @@ let addNote = (title, body) => {
 
 let removeNote = (title) => {
     
-    let originalNotes = fetchNotes();
+    return new Promise((resolve, reject) => {
 
-    let filteredNotes = originalNotes
-        .filter(note => note.title !== title);
+        let originalNotes = fetchNotes();
+        
+        let filteredNotes = originalNotes
+            .filter(note => note.title !== title);
+    
+        saveNotes(filteredNotes);
+        
+        // resolve(originalNotes.length > filteredNotes.length);
 
-    saveNotes(filteredNotes);
+        if(originalNotes.length > filteredNotes.length)
+            return resolve(`Note "${title}" removed successfully`);
+        
+        reject(`Title ${title} not found`);
 
-    return originalNotes.length > filteredNotes.length;
+    });
 };
 
 let getNote = (title) => fetchNotes().find(current => current.title === title);
