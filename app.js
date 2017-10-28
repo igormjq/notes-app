@@ -1,27 +1,6 @@
 const notes = require('./notes');
-const yargs = require('yargs');
+const argv = require('./yargs-config');
 
-const argv = yargs
-    .command('add', 'Add a new note to the file', {
-        title: {
-            describe: 'Title of the note',
-            demand: true,
-            alias: 't'
-        },
-        body: {
-            describe: 'The body content of the note',
-            alias: 'b'
-        }
-    })
-    .command('read', 'Fetches and read a note', {
-        title: {
-            describe: 'Title of the note',
-            demand: true,
-            alias: 't'
-        }
-    })
-    .help()
-    .argv;
 const command = argv._[0];
 
 switch(command) {
